@@ -62,6 +62,6 @@ describe('Postgres Strategy', function () {
   it('Remove by id', async () => {
     const [item] = await context.read();
     const result = await context.delete(item.id);
-    assert.deepEqual(result, 1)
+    assert.deepEqual(result, 1);
   })
 })
