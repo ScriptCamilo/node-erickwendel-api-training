@@ -1,9 +1,10 @@
 const assert = require('assert');
 
 const ContextStrategy = require('../db/strategies/base/contextStrategy');
-const Postgres = require('./../db/strategies/postgres');
+const heroSchema = require('../db/strategies/postgres/schemas/heroSchema');
+const Postgres = require('../db/strategies/postgres/postgres');
 
-const context = new ContextStrategy(new Postgres());
+let context = {};
 
 const MOCK_HERO_CREATE = {
   name: 'Green Arrow',
@@ -15,8 +16,14 @@ const MOCK_HERO_UPDATE= {
   power: 'Money',
 }
 
-describe('Postgres Strategy', function () {
+describe.only('Postgres Strategy', function () {
   this.timeout(Infinity);
+  this.beforeAll(async () => {
+    const connection = await Postgres.connect();
+    const model = await Postgres.defineModel(connection, heroSchema);
+    context = new ContextStrategy(new Postgres(connection, model));
+  });
+
   this.afterAll(async () => {
     await context.delete();
   });

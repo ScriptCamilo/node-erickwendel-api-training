@@ -18,7 +18,7 @@ const MOCK_HERO_UPDATE= {
 
 let MOCK_UPDATED_HERO_ID = '';
 
-describe.only('MongoDB Strategy', function () {
+describe('MongoDB Strategy', function () {
   this.timeout(Infinity);
   this.beforeAll(async () => {
     const connection = MongoDb.connect();
