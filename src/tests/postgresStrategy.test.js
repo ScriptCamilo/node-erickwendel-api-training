@@ -17,7 +17,7 @@ const MOCK_HERO_UPDATE= {
 
 describe('Postgres Strategy', function () {
   this.timeout(Infinity);
-  this.beforeAll(async () => {
+  this.afterAll(async () => {
     await context.delete();
   });
 

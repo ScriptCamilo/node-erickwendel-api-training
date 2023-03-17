@@ -19,7 +19,7 @@ class Postgres extends ICrud {
     super();
     this._driver = null;
     this._heroes = null;
-    this._connect();
+    this.#connect();
   }
 
   async create(item) {
@@ -80,7 +80,7 @@ class Postgres extends ICrud {
     await this._heroes.sync();
   }
 
-  _connect() {
+  async #connect() {
     this._driver = new Sequelize(
       'heroes',
       'scriptcamilo',
